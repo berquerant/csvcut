@@ -157,20 +157,14 @@ fn read_csv(delimiter: u8, need_headers: bool) -> Input {
         .has_headers(need_headers)
         .delimiter(delimiter)
         .from_reader(io::stdin());
-    let headers = if need_headers {
-        match reader.headers() {
-            Err(_) => None,
-            Ok(v) => {
-                if v.is_empty() {
-                    None
-                } else {
-                    Some(RecordRow::new(v.clone()))
-                }
-            }
-        }
-    } else {
-        None
-    };
+    let headers = need_headers
+        .then(|| {
+            reader
+                .headers()
+                .ok()
+                .and_then(|v| v.is_empty().then(|| RecordRow::new(v.clone())))
+        })
+        .flatten();
     Input(
         Box::new(reader.into_records().map(|x| x.map(RecordRow::new))),
         headers,
