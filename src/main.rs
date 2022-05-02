@@ -329,6 +329,10 @@ struct Cli {
     /// ❯ (echo 'a,b,c';echo '2,3,4';echo '11,12,13') | csvcut -f 2 --json --header
     /// {"b":"3"}
     /// {"b":"12"}
+    /// ❯ (echo '"a,b","c","d,e,f"';echo '"1","2,3","4"';echo '"11","12","13,14,15"') | csvcut -f 1,3 --json
+    /// ["a,b","d,e,f"]
+    /// ["1","4"]
+    /// ["11","13,14,15"]
     /// ```
     #[clap(short, long, verbatim_doc_comment)]
     json: bool,
