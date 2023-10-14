@@ -20,6 +20,7 @@ jobs:
           rustup set profile minimal
           rustup install stable
           rustup component add rustfmt clippy
+          cargo install cargo-audit
       - name: build
         run: cargo build
       - name: check
@@ -28,5 +29,7 @@ jobs:
         run: cargo fmt --all -- --check
       - name: clippy
         run: cargo clippy -- -D warnings
+      - name: audit
+        run: cargo audit
       - name: test
         run: cargo test

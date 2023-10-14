@@ -1,4 +1,4 @@
-use clap::{CommandFactory, ErrorKind, Parser};
+use clap::{error::ErrorKind, CommandFactory, Parser};
 use nom::{
     branch::alt,
     bytes::complete::tag,
