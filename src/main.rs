@@ -1,5 +1,4 @@
 use clap::{CommandFactory, ErrorKind, Parser};
-use csv;
 use nom::{
     branch::alt,
     bytes::complete::tag,
@@ -9,7 +8,6 @@ use nom::{
     sequence::{preceded, separated_pair, terminated},
     IResult,
 };
-use serde_json;
 use std::collections::HashMap;
 use std::convert;
 use std::io;
